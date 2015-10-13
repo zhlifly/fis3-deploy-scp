@@ -1,0 +1,20 @@
+{
+  "name": "fis3-deploy-scp",
+  "version": "1.0.2",
+  "description": "fis3 deploy scp plugin",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "fis",
+    "fis-plus",
+    "fis3",
+    "deploy",
+    "scp"
+  ],
+  "author": {
+    "name": "souche.com"
+  },
+  "license": "BSD"
+}
