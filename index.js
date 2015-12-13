@@ -16,7 +16,31 @@ module.exports = function(options, modified, total, callback) {
   var to = options.to;
   var source = options.source;
   var server = options.server;
-  var cmd = 'cd ' + path.join(process.cwd(),source) + ';zip -r dist.zip ./*';
+
+  var outputpath = path.join(process.cwd(),source);
+
+  //for cygwin environment
+  var pathsplit = outputpath.split(':');
+
+  if (pathsplit.length > 1) {
+
+    for(var i=0;i<pathsplit.length;i++) {
+      
+      if (i == 0) {
+
+        outputpath = "/cygdrive/" + pathsplit[i].toLowerCase();
+
+      } else {
+
+        outputpath = outputpath + pathsplit[i];
+
+      }
+
+    }
+
+  } 
+
+  var cmd = 'cd ' + outputpath + ';zip -r dist.zip ./*';
   var scp_cmd = "scp " + path.join(source,"./dist.zip") + " " + server + ":" + to +" ";
   var unzip_cmd = "ssh " + server + " \"cd " + to + ";unzip -o dist.zip;rm -rf dist.zip;exit;\""
   child_process.exec(cmd,function(e,p){
